@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据分析技术 - 课程学习</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                },
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.1), 0 10px 10px -5px rgba(59, 130, 246, 0.04);
+            }
+        }
+    </style>
+</head>
+<body class="font-inter bg-gray-50">
+    <nav class="bg-white shadow-md fixed w-full z-10">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="text-primary font-bold text-xl">个人课程展示</a>
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html#home" class="text-gray-700 hover:text-primary transition-colors">首页</a>
+                    <a href="index.html#courses" class="text-gray-700 hover:text-primary transition-colors">课程</a>
+                    <a href="index.html#about" class="text-gray-700 hover:text-primary transition-colors">关于我</a>
+                    <a href="index.html#contact" class="text-gray-700 hover:text-primary transition-colors">联系我</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-gray-700 focus:outline-none">
+                        <i class="fa fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg absolute w-full">
+            <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+                <a href="index.html#home" class="text-gray-700 hover:text-primary transition-colors py-2">首页</a>
+                <a href="index.html#courses" class="text-gray-700 hover:text-primary transition-colors py-2">课程</a>
+                <a href="index.html#about" class="text-gray-700 hover:text-primary transition-colors py-2">关于我</a>
+                <a href="index.html#contact" class="text-gray-700 hover:text-primary transition-colors py-2">联系我</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="pt-24 pb-16 bg-gradient-to-br from-primary/10 to-secondary/10">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col items-center text-center">
+                <div class="w-24 h-24 bg-primary/20 rounded-full flex items-center justify-center mb-6">
+                    <i class="fa fa-bar-chart text-5xl text-primary"></i>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4 text-shadow">数据分析技术</h1>
+                <p class="text-xl text-gray-600 mb-6">高职大二第二学期 · 商务数据分析与应用专业</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <span class="bg-white px-4 py-2 rounded-full shadow-sm"><i class="fa fa-clock-o mr-2"></i>64学时</span>
+                    <span class="bg-white px-4 py-2 rounded-full shadow-sm"><i class="fa fa-book mr-2"></i>理论+实践</span>
+                    <span class="bg-white px-4 py-2 rounded-full shadow-sm"><i class="fa fa-star mr-2"></i>专业核心课</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">课程简介</h2>
+                <div class="bg-gray-50 rounded-xl p-8 shadow-sm">
+                    <p class="text-gray-700 mb-4 leading-relaxed">
+                        《数据分析技术》是商务数据分析与应用专业的核心课程，适合已经掌握Python基础、数据采集与处理等前置知识的高职大二第二学期学生学习。
+                    </p>
+                    <p class="text-gray-700 mb-4 leading-relaxed">
+                        本课程将系统讲授数据分析的基本原理、方法和技术，涵盖数据清洗、数据可视化、统计分析、机器学习入门等内容，培养学生运用数据分析技术解决实际商务问题的能力。
+                    </p>
+                    <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-4">前置课程</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="bg-primary/10 text-primary px-4 py-2 rounded-lg">Python基础</span>
+                        <span class="bg-primary/10 text-primary px-4 py-2 rounded-lg">数据采集与处理</span>
+                        <span class="bg-primary/10 text-primary px-4 py-2 rounded-lg">商务数据分析与应用基础</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">学习目标</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                    <div class="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fa fa-check-circle text-secondary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">知识目标</h3>
+                    <ul class="text-gray-600 space-y-2">
+                        <li><i class="fa fa-angle-right mr-2 text-primary"></i>掌握数据分析的基本概念和流程</li>
+                        <li><i class="fa fa-angle-right mr-2 text-primary"></i>理解统计分析的基本原理</li>
+                        <li><i class="fa fa-angle-right mr-2 text-primary"></i>熟悉数据可视化的方法和原则</li>
+                        <li><i class="fa fa-angle-right mr-2 text-primary"></i>了解机器学习的基础知识</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                    <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fa fa-cogs text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">能力目标</h3>
+                    <ul class="text-gray-600 space-y-2">
+                        <li><i class="fa fa-angle-right mr-2 text-primary"></i>能够使用Pandas进行数据清洗</li>
+                        <li><i class="fa fa-angle-right mr-2 text-primary"></i>能够用Matplotlib/Seaborn绘制图表</li>
+                        <li><i class="fa fa-angle-right mr-2 text-primary"></i>能够进行描述性统计和推断统计</li>
+                        <li><i class="fa fa-angle-right mr-2 text-primary"></i>能够运用数据分析解决实际问题</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fa fa-heart text-purple-500 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">素养目标</h3>
+                    <ul class="text-gray-600 space-y-2">
+                        <li><i class="fa fa-angle-right mr-2 text-primary"></i>培养严谨的数据分析思维</li>
+                        <li><i class="fa fa-angle-right mr-2 text-primary"></i>提升团队协作与沟通能力</li>
+                        <li><i class="fa fa-angle-right mr-2 text-primary"></i>增强创新意识和问题解决能力</li>
+                        <li><i class="fa fa-angle-right mr-2 text-primary"></i>树立数据驱动决策的理念</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">课程大纲</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="space-y-8">
+                    <div class="border-l-4 border-primary pl-6">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-primary text-white px-3 py-1 rounded-full text-sm mr-3">第1-2周</span>
+                            <h3 class="text-xl font-semibold text-gray-800">模块一：数据分析基础</h3>
+                        </div>
+                        <ul class="text-gray-600 space-y-2 ml-2">
+                            <li><i class="fa fa-circle text-xs mr-2 text-primary"></i>数据分析概述与流程</li>
+                            <li><i class="fa fa-circle text-xs mr-2 text-primary"></i>数据分析环境搭建（Anaconda、Jupyter Notebook）</li>
+                            <li><i class="fa fa-circle text-xs mr-2 text-primary"></i>Pandas库入门与Series对象</li>
+                            <li><i class="fa fa-circle text-xs mr-2 text-primary"></i>DataFrame对象的创建与操作</li>
+                        </ul>
+                    </div>
+
+                    <div class="border-l-4 border-secondary pl-6">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-secondary text-white px-3 py-1 rounded-full text-sm mr-3">第3-5周</span>
+                            <h3 class="text-xl font-semibold text-gray-800">模块二：数据清洗与预处理</h3>
+                        </div>
+                        <ul class="text-gray-600 space-y-2 ml-2">
+                            <li><i class="fa fa-circle text-xs mr-2 text-secondary"></i>数据读取与写入（CSV、Excel、数据库）</li>
+                            <li><i class="fa fa-circle text-xs mr-2 text-secondary"></i>缺失值处理与数据填充</li>
+                            <li><i class="fa fa-circle text-xs mr-2 text-secondary"></i>重复数据检测与删除</li>
+                            <li><i class="fa fa-circle text-xs mr-2 text-secondary"></i>异常值检测与处理</li>
+                            <li><i class="fa fa-circle text-xs mr-2 text-secondary"></i>数据类型转换与数据标准化</li>
+                            <li><i class="fa fa-circle text-xs mr-2 text-secondary"></i>数据合并与重塑</li>
+                        </ul>
+                    </div>
+
+                    <div class="border-l-4 border-purple-500 pl-6">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-purple-500 text-white px-3 py-1 rounded-full text-sm mr-3">第6-8周</span>
+                            <h3 class="text-xl font-semibold text-gray-800">模块三：数据可视化</h3>
+                        </div>
+                        <ul class="text-gray-600 space-y-2 ml-2">
+                            <li><i class="fa fa-circle text-xs mr-2 text-purple-500"></i>数据可视化原则与图表选择</li>
+                            <li><i class="fa fa-circle text-xs mr-2 text-purple-500"></i>Matplotlib基础绘图</li>
+                            <li><i class="fa fa-circle text-xs mr-2 text-purple-500"></i>Seaborn高级可视化</li>
+                            <li><i class="fa fa-circle text-xs mr-2 text-purple-500"></i>折线图、柱状图、饼图的绘制</li>
+                            <li><i class="fa fa-circle text-xs mr-2 text-purple-500"></i>散点图、热力图、箱线图的应用</li>
+                            <li><i class="fa fa-circle text-xs mr-2 text-purple-500"></i>交互式可视化（Plotly入门）</li>
+                        </ul>
+                    </div>
+
+                    <div class="border-l-4 border-orange-500 pl-6">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-orange-500 text-white px-3 py-1 rounded-full text-sm mr-3">第9-12周</span>
+                            <h3 class="text-xl font-semibold text-gray-800">模块四：统计分析</h3>
+                        </div>
+                        <ul class="text-gray-600 space-y-2 ml-2">
+                            <li><i class="fa fa-circle text-xs mr-2 text-orange-500"></i>描述性统计分析</li>
+                            <li><i class="fa fa-circle text-xs mr-2 text-orange-500"></i>概率分布与抽样</li>
+                            <li><i class="fa fa-circle text-xs mr-2 text-orange-500"></i>假设检验（t检验、卡方检验）</li>
+                            <li><i class="fa fa-circle text-xs mr-2 text-orange-500"></i>相关分析与回归分析</li>
+                            <li><i class="fa fa-circle text-xs mr-2 text-orange-500"></i>方差分析</li>
+                            <li><i class="fa fa-circle text-xs mr-2 text-orange-500"></i>使用Scipy进行统计计算</li>
+                        </ul>
+                    </div>
+
+                    <div class="border-l-4 border-red-500 pl-6">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-red-500 text-white px-3 py-1 rounded-full text-sm mr-3">第13-15周</span>
+                            <h3 class="text-xl font-semibold text-gray-800">模块五：机器学习入门</h3>
+                        </div>
+                        <ul class="text-gray-600 space-y-2 ml-2">
+                            <li><i class="fa fa-circle text-xs mr-2 text-red-500"></i>机器学习概述与分类</li>
+                            <li><i class="fa fa-circle text-xs mr-2 text-red-500"></i>Scikit-learn库入门</li>
+                            <li><i class="fa fa-circle text-xs mr-2 text-red-500"></i>线性回归模型</li>
+                            <li><i class="fa fa-circle text-xs mr-2 text-red-500"></i>逻辑回归与分类</li>
+                            <li><i class="fa fa-circle text-xs mr-2 text-red-500"></i>决策树与随机森林</li>
+                            <li><i class="fa fa-circle text-xs mr-2 text-red-500"></i>模型评估与优化</li>
+                        </ul>
+                    </div>
+
+                    <div class="border-l-4 border-teal-500 pl-6">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-teal-500 text-white px-3 py-1 rounded-full text-sm mr-3">第16-18周</span>
+                            <h3 class="text-xl font-semibold text-gray-800">模块六：综合项目实践</h3>
+                        </div>
+                        <ul class="text-gray-600 space-y-2 ml-2">
+                            <li><i class="fa fa-circle text-xs mr-2 text-teal-500"></i>商务数据分析项目选题</li>
+                            <li><i class="fa fa-circle text-xs mr-2 text-teal-500"></i>数据收集与清洗</li>
+                            <li><i class="fa fa-circle text-xs mr-2 text-teal-500"></i>探索性数据分析与可视化</li>
+                            <li><i class="fa fa-circle text-xs mr-2 text-teal-500"></i>统计建模与机器学习应用</li>
+                            <li><i class="fa fa-circle text-xs mr-2 text-teal-500"></i>分析报告撰写与展示</li>
+                            <li><i class="fa fa-circle text-xs mr-2 text-teal-500"></i>项目答辩与评价</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">主要工具与库</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 max-w-5xl mx-auto">
+                <div class="bg-white rounded-xl shadow-md p-6 text-center card-hover">
+                    <i class="fa fa-python text-4xl text-blue-500 mb-3"></i>
+                    <h3 class="font-semibold text-gray-800">Python</h3>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6 text-center card-hover">
+                    <div class="w-16 h-16 mx-auto mb-3 flex items-center justify-center">
+                        <span class="text-4xl font-bold text-gray-700">Pd</span>
+                    </div>
+                    <h3 class="font-semibold text-gray-800">Pandas</h3>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6 text-center card-hover">
+                    <div class="w-16 h-16 mx-auto mb-3 flex items-center justify-center">
+                        <span class="text-4xl font-bold text-gray-700">Np</span>
+                    </div>
+                    <h3 class="font-semibold text-gray-800">NumPy</h3>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6 text-center card-hover">
+                    <i class="fa fa-line-chart text-4xl text-orange-500 mb-3"></i>
+                    <h3 class="font-semibold text-gray-800">Matplotlib</h3>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6 text-center card-hover">
+                    <div class="w-16 h-16 mx-auto mb-3 flex items-center justify-center">
+                        <span class="text-4xl font-bold text-gray-700">Sn</span>
+                    </div>
+                    <h3 class="font-semibold text-gray-800">Seaborn</h3>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6 text-center card-hover">
+                    <i class="fa fa-cube text-4xl text-orange-600 mb-3"></i>
+                    <h3 class="font-semibold text-gray-800">Scikit-learn</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">考核方式</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                            <i class="fa fa-tasks text-primary mr-3"></i>过程性考核（60%）
+                        </h3>
+                        <ul class="text-gray-600 space-y-3">
+                            <li class="flex justify-between items-center">
+                                <span>课堂表现与出勤</span>
+                                <span class="bg-primary text-white px-3 py-1 rounded-full text-sm">10%</span>
+                            </li>
+                            <li class="flex justify-between items-center">
+                                <span>课后作业与实验报告</span>
+                                <span class="bg-primary text-white px-3 py-1 rounded-full text-sm">20%</span>
+                            </li>
+                            <li class="flex justify-between items-center">
+                                <span>阶段性小测验</span>
+                                <span class="bg-primary text-white px-3 py-1 rounded-full text-sm">15%</span>
+                            </li>
+                            <li class="flex justify-between items-center">
+                                <span>小组讨论与协作</span>
+                                <span class="bg-primary text-white px-3 py-1 rounded-full text-sm">15%</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                            <i class="fa fa-graduation-cap text-secondary mr-3"></i>终结性考核（40%）
+                        </h3>
+                        <ul class="text-gray-600 space-y-3">
+                            <li class="flex justify-between items-center">
+                                <span>综合项目实践</span>
+                                <span class="bg-secondary text-white px-3 py-1 rounded-full text-sm">25%</span>
+                            </li>
+                            <li class="flex justify-between items-center">
+                                <span>期末笔试或机试</span>
+                                <span class="bg-secondary text-white px-3 py-1 rounded-full text-sm">15%</span>
+                            </li>
+                        </ul>
+                        <div class="mt-6 p-4 bg-secondary/10 rounded-lg">
+                            <p class="text-gray-700 text-sm">
+                                <i class="fa fa-info-circle text-secondary mr-2"></i>
+                                综合项目将从选题、数据处理、分析方法、报告质量、展示答辩等多个维度进行评价。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">推荐资源</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fa fa-book text-blue-500 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">参考教材</h3>
+                    <ul class="text-gray-600 space-y-2">
+                        <li>《Python数据分析与展示》</li>
+                        <li>《利用Python进行数据分析》</li>
+                        <li>《Python数据科学手册》</li>
+                        <li>《机器学习实战》</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fa fa-globe text-green-500 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">在线资源</h3>
+                    <ul class="text-gray-600 space-y-2">
+                        <li>Kaggle数据集与竞赛</li>
+                        <li>GitHub开源项目</li>
+                        <li>CSDN、知乎技术博客</li>
+                        <li>MOOC在线课程</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fa fa-code text-purple-500 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">工具资源</h3>
+                    <ul class="text-gray-600 space-y-2">
+                        <li>Anaconda发行版</li>
+                        <li>Jupyter Notebook</li>
+                        <li>VS Code编辑器</li>
+                        <li>Git版本控制</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-gray-400">© 2026 个人课程展示页面</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="index.html#home" class="text-gray-400 hover:text-white transition-colors">首页</a>
+                    <a href="index.html#courses" class="text-gray-400 hover:text-white transition-colors">课程</a>
+                    <a href="index.html#about" class="text-gray-400 hover:text-white transition-colors">关于我</a>
+                    <a href="index.html#contact" class="text-gray-400 hover:text-white transition-colors">联系我</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-white/95', 'backdrop-blur-sm');
+                nav.classList.remove('bg-white');
+            } else {
+                nav.classList.remove('bg-white/95', 'backdrop-blur-sm');
+                nav.classList.add('bg-white');
+            }
+        });
+    </script>
+</body>
+</html>
