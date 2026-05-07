@@ -333,6 +333,184 @@
         }
     }
 
+    // ========== 答题功能 ==========
+    
+    // 设置学习/答题模式
+    window.setMode = function(mode) {
+        const modeBtns = document.querySelectorAll('.mode-btn');
+        modeBtns.forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.mode === mode);
+        });
+        
+        if (mode === 'quiz') {
+            document.body.classList.add('quiz-mode');
+            // 隐藏所有解答
+            document.querySelectorAll('.solution-step').forEach(step => {
+                const content = step.querySelector('.step-content');
+                if (content) content.style.display = 'none';
+            });
+            // 隐藏所有参考答案
+            document.querySelectorAll('.answer-section, .solution-content').forEach(el => {
+                el.style.display = 'none';
+            });
+            // 展开第一个步骤引导用户
+            const firstStep = document.querySelector('.quiz-section .quiz-card');
+            if (firstStep) {
+                firstStep.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        } else {
+            document.body.classList.remove('quiz-mode');
+            // 显示所有解答
+            document.querySelectorAll('.solution-step').forEach(step => {
+                const content = step.querySelector('.step-content');
+                if (content) content.style.display = 'block';
+            });
+            // 显示参考答案
+            document.querySelectorAll('.answer-section, .solution-content').forEach(el => {
+                el.style.display = 'block';
+            });
+        }
+        
+        localStorage.setItem('dataAnalysis_mode', mode);
+    };
+    
+    // 切换解答步骤展开/收起
+    window.toggleStep = function(header) {
+        const step = header.closest('.solution-step');
+        const content = step.querySelector('.step-content');
+        const toggle = step.querySelector('.step-toggle');
+        
+        if (content.style.display === 'none' || content.style.display === '') {
+            content.style.display = 'block';
+            if (toggle) toggle.textContent = '▲';
+            step.classList.add('expanded');
+        } else {
+            content.style.display = 'none';
+            if (toggle) toggle.textContent = '▼';
+            step.classList.remove('expanded');
+        }
+    };
+    
+    // 显示下一个步骤
+    window.showNextStep = function(currentStep) {
+        const allSteps = document.querySelectorAll('.solution-step');
+        const currentIndex = Array.from(allSteps).indexOf(currentStep);
+        
+        if (currentIndex < allSteps.length - 1) {
+            const nextStep = allSteps[currentIndex + 1];
+            const content = nextStep.querySelector('.step-content');
+            const toggle = nextStep.querySelector('.step-toggle');
+            
+            content.style.display = 'block';
+            if (toggle) toggle.textContent = '▲';
+            nextStep.classList.add('expanded');
+            nextStep.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    };
+    
+    // 检查答题答案
+    window.checkQuiz = function(btn, expectedAnswer) {
+        const card = btn.closest('.quiz-card');
+        const textarea = card.querySelector('.quiz-input');
+        const feedback = card.querySelector('.quiz-feedback');
+        const userAnswer = textarea.value.trim().toLowerCase().replace(/\s+/g, '');
+        
+        // 显示反馈区域
+        feedback.style.display = 'block';
+        
+        if (!userAnswer) {
+            feedback.innerHTML = `
+                <div class="feedback-content warning">
+                    <span class="feedback-icon">💡</span>
+                    <span>请先在上面的代码框中输入你的答案！</span>
+                </div>
+            `;
+            feedback.className = 'quiz-feedback warning';
+            return;
+        }
+        
+        // 检查答案是否正确
+        const isCorrect = userAnswer.includes(expectedAnswer.toLowerCase());
+        
+        if (isCorrect) {
+            feedback.innerHTML = `
+                <div class="feedback-content success">
+                    <span class="feedback-icon">🎉</span>
+                    <div>
+                        <strong>回答正确！</strong>
+                        <p>你的答案正确，继续加油！</p>
+                    </div>
+                </div>
+            `;
+            feedback.className = 'quiz-feedback success';
+            card.classList.add('correct');
+            
+            // 保存答题记录
+            saveQuizAnswer(card.dataset.quizId || 'unknown', true);
+        } else {
+            feedback.innerHTML = `
+                <div class="feedback-content error">
+                    <span class="feedback-icon">🤔</span>
+                    <div>
+                        <strong>答案不正确</strong>
+                        <p>请检查你的代码，注意大小写和空格。可以查看下方的参考答案。</p>
+                    </div>
+                </div>
+            `;
+            feedback.className = 'quiz-feedback error';
+            card.classList.remove('correct');
+            saveQuizAnswer(card.dataset.quizId || 'unknown', false);
+        }
+    };
+    
+    // 显示/隐藏参考答案
+    window.toggleAnswer = function(btn) {
+        const card = btn.closest('.quiz-card');
+        const answerSection = card.querySelector('.answer-section');
+        
+        if (answerSection.style.display === 'none' || answerSection.style.display === '') {
+            answerSection.style.display = 'block';
+            btn.textContent = '🔒 收起答案';
+        } else {
+            answerSection.style.display = 'none';
+            btn.textContent = '🔍 查看参考答案';
+        }
+    };
+    
+    // 重置答题
+    window.resetQuiz = function(btn) {
+        const card = btn.closest('.quiz-card');
+        const textarea = card.querySelector('.quiz-input');
+        const feedback = card.querySelector('.quiz-feedback');
+        
+        textarea.value = '';
+        feedback.style.display = 'none';
+        card.classList.remove('correct');
+    };
+    
+    // 保存答题记录
+    function saveQuizAnswer(quizId, isCorrect) {
+        try {
+            const answers = JSON.parse(localStorage.getItem('dataAnalysis_quizAnswers') || '{}');
+            answers[quizId] = {
+                correct: isCorrect,
+                timestamp: new Date().toISOString()
+            };
+            localStorage.setItem('dataAnalysis_quizAnswers', JSON.stringify(answers));
+        } catch (e) {
+            console.warn('保存答题记录失败:', e);
+        }
+    }
+    
+    // 加载保存的模式
+    function loadSavedMode() {
+        const savedMode = localStorage.getItem('dataAnalysis_mode');
+        if (savedMode) {
+            // 延迟执行，等待DOM渲染
+            setTimeout(() => setMode(savedMode), 100);
+        }
+    }
+
     // ========== 复制代码 ==========
     window.copyCode = function(btn) {
         const codeBlock = btn.closest('.code-block');
@@ -370,6 +548,7 @@
 
     // ========== 启动 ==========
     loadTheme();
+    loadSavedMode();
     init();
 
 })();

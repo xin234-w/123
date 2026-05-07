@@ -1075,3 +1075,417 @@ a:hover {
 .btn-icon.just-marked {
     animation: checkmark 0.3s ease;
 }
+
+/* ============================================
+   模式切换按钮
+   ============================================ */
+.mode-switch {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 24px 0;
+    padding: 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-md);
+}
+
+.mode-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border: 2px solid var(--border-primary);
+    border-radius: var(--radius-md);
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.mode-btn:hover {
+    border-color: var(--border-accent);
+    color: var(--text-primary);
+}
+
+.mode-btn.active {
+    border-color: var(--accent-blue);
+    background: var(--bg-active);
+    color: var(--accent-blue);
+}
+
+.mode-btn[data-mode="quiz"].active {
+    border-color: var(--accent-purple);
+    background: rgba(188,140,255,0.15);
+    color: var(--accent-purple);
+}
+
+/* ============================================
+   分步解答样式
+   ============================================ */
+.solution-section {
+    margin: 24px 0;
+}
+
+.solution-step {
+    margin-bottom: 12px;
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--bg-card);
+    transition: all var(--transition);
+}
+
+.solution-step:hover {
+    border-color: var(--border-accent);
+}
+
+.solution-step.expanded {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 1px var(--accent-blue);
+}
+
+.step-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    background: var(--bg-secondary);
+    cursor: pointer;
+    transition: all var(--transition);
+    user-select: none;
+}
+
+.step-header:hover {
+    background: var(--bg-hover);
+}
+
+.step-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: var(--accent-blue);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.step-title {
+    flex: 1;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.step-toggle {
+    font-size: 12px;
+    color: var(--text-muted);
+    transition: transform 0.2s ease;
+}
+
+.step-content {
+    padding: 20px;
+    border-top: 1px solid var(--border-primary);
+}
+
+.step-explain {
+    margin-top: 16px;
+    padding: 14px 16px;
+    background: rgba(88,166,255,0.08);
+    border-left: 3px solid var(--accent-blue);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+.step-explain::before {
+    content: '📝 说明：';
+    display: block;
+    font-weight: 600;
+    color: var(--accent-blue);
+    margin-bottom: 8px;
+}
+
+/* ============================================
+   答题区域样式
+   ============================================ */
+.quiz-section {
+    margin: 24px 0;
+}
+
+.quiz-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    margin-bottom: 16px;
+    transition: all var(--transition);
+}
+
+.quiz-card:hover {
+    border-color: var(--border-accent);
+}
+
+.quiz-card.correct {
+    border-color: var(--accent-green);
+    background: rgba(63,185,80,0.05);
+}
+
+.quiz-question {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+    line-height: 1.6;
+}
+
+.quiz-question::before {
+    content: '❓';
+    margin-right: 8px;
+}
+
+.quiz-hint {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    font-style: italic;
+}
+
+.quiz-input-area {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.quiz-input {
+    width: 100%;
+    min-height: 120px;
+    padding: 14px;
+    background: var(--bg-code);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    resize: vertical;
+    transition: all var(--transition);
+}
+
+.quiz-input:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 3px rgba(88,166,255,0.2);
+}
+
+.quiz-input::placeholder {
+    color: var(--text-muted);
+}
+
+.quiz-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.quiz-submit {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 20px;
+    background: var(--accent-blue);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.quiz-submit:hover {
+    background: #4393e6;
+    transform: translateY(-1px);
+}
+
+.quiz-submit:active {
+    transform: translateY(0);
+}
+
+.quiz-secondary {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.quiz-secondary:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+    border-color: var(--border-accent);
+}
+
+/* 反馈区域 */
+.quiz-feedback {
+    margin-top: 16px;
+    padding: 16px;
+    border-radius: var(--radius-sm);
+    display: none;
+}
+
+.quiz-feedback.success {
+    background: rgba(63,185,80,0.1);
+    border: 1px solid rgba(63,185,80,0.3);
+    display: block;
+}
+
+.quiz-feedback.error {
+    background: rgba(248,81,73,0.1);
+    border: 1px solid rgba(248,81,73,0.3);
+    display: block;
+}
+
+.quiz-feedback.warning {
+    background: rgba(210,153,34,0.1);
+    border: 1px solid rgba(210,153,34,0.3);
+    display: block;
+}
+
+.feedback-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.feedback-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.feedback-content strong {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.feedback-content p {
+    margin: 0;
+    color: var(--text-secondary);
+}
+
+/* 参考答案区域 */
+.answer-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--border-primary);
+    display: none;
+}
+
+.answer-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+.answer-header::before {
+    content: '📋';
+}
+
+.answer-section .code-block {
+    margin-top: 12px;
+}
+
+.answer-section .code-block pre {
+    background: rgba(63,185,80,0.05) !important;
+}
+
+/* ============================================
+   答题模式下的样式
+   ============================================ */
+body.quiz-mode .solution-content,
+body.quiz-mode .answer-section {
+    display: none !important;
+}
+
+body.quiz-mode .quiz-section {
+    display: block;
+}
+
+body:not(.quiz-mode) .quiz-section {
+    display: block;
+}
+
+/* ============================================
+   引导步骤按钮
+   ============================================ */
+.next-step-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 16px;
+    padding: 8px 14px;
+    background: var(--accent-green);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.next-step-btn:hover {
+    background: #36a348;
+    transform: translateY(-1px);
+}
+
+/* ============================================
+   响应式调整
+   ============================================ */
+@media (max-width: 768px) {
+    .mode-switch {
+        flex-direction: column;
+    }
+    
+    .mode-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .quiz-actions {
+        flex-direction: column;
+    }
+    
+    .quiz-submit,
+    .quiz-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .step-header {
+        padding: 12px 14px;
+    }
+    
+    .quiz-card {
+        padding: 16px;
+    }
+}
